@@ -415,6 +415,13 @@ export interface ApiArticleSjArticleSj extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
+    articleid: Schema.Attribute.UID &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     author: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
