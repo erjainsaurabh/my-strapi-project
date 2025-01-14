@@ -1,0 +1,27 @@
+FROM node:18-alpine
+
+# Install required Alpine packages for Node.js and Strapi
+#RUN apk add --no-cache \
+#    python3 \
+#    make \
+#    g++ \
+#    libuv \
+#    libc6-compat
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json first for better caching
+COPY package.json package-lock.json ./
+
+# Install node modules
+RUN rm -rf node_modules && npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose Strapi's default port
+EXPOSE 1337
+
+# Start the Strapi application in development mode
+CMD ["npm", "run", "develop"]
